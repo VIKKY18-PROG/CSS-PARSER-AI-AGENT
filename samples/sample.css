@@ -1,0 +1,65 @@
+@charset "UTF-8";
+@import url("reset.css");
+
+/* A commented-out rule with braces must be ignored:
+   .ghost { color: red; } */
+
+:root {
+  --primary: #3B82F6;
+  --primary-dark: #1d4ed8;
+  --space: 8px;
+  --brand: var(--primary);        /* variable that points to another variable */
+  --loop-a: var(--loop-b);        /* circular reference: must not hang */
+  --loop-b: var(--loop-a);
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("inter.woff2") format("woff2");
+}
+
+body {
+  font-family: "Inter", -apple-system, sans-serif;
+  color: #111;
+  background: var(--brand);
+  margin: 0;
+}
+
+h1, h2 {
+  font: 700 2rem/1.2 Georgia, serif;
+  color: rgb(17 24 39);
+}
+
+.btn {
+  background: var(--primary);
+  color: #fff;
+  padding: calc(var(--space) * 2);
+  border: 1px solid red !important;
+}
+
+.btn:hover { background: var(--primary-dark) }   /* last declaration has no semicolon */
+
+.btn::after { content: "}{;"; }                  /* braces and semicolon inside a string */
+
+.icon { background: url(data:image/svg+xml;base64,AAA;BBB) no-repeat; }  /* ';' inside url() */
+
+#nav a.active:not(.disabled) { color: hsl(210, 50%, 40%); }
+
+.card {
+  color: blue;
+  color: green;                                  /* duplicate property */
+  display: grid;
+  & .title { font-weight: bold; }                /* CSS nesting */
+}
+
+@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+@media (max-width: 768px) {
+  .btn { padding: 4px; }
+  @media (orientation: portrait) {
+    .card { display: block; }
+  }
+}
+
+.unclosed { color: pink;
+}

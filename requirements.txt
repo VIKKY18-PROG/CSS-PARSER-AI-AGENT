@@ -1,0 +1,3 @@
+# core has no dependencies
+# optional, for --llm mode:
+anthropic>=0.40
